@@ -9,6 +9,9 @@ export const authConfig = {
   },
   session: { strategy: "jwt" },
   trustHost: true,
+  // Accept either env var name. Without a secret the middleware throws at
+  // runtime on Vercel (MIDDLEWARE_INVOCATION_FAILED) when decoding the cookie.
+  secret: process.env.AUTH_SECRET ?? process.env.NEXTAUTH_SECRET,
   providers: [],
   callbacks: {
     jwt({ token, user }) {

@@ -59,8 +59,4 @@ const nextConfig = {
   },
 };
 
-// ISOLATION TEST: bypassing next-pwa to confirm it's corrupting the Edge
-// middleware bundle (MIDDLEWARE_INVOCATION_FAILED). Will restore via a
-// maintained PWA plugin once confirmed.
-export default nextConfig;
-void withPWA;
+export default withPWA(nextConfig);

@@ -5,7 +5,26 @@
       "Bash(npm install *)",
       "Bash(npx prisma *)",
       "Bash(npx tsc *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(GIT_SSH_COMMAND=\"ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes\" git push -u origin main)",
+      "Bash(openssl rand *)",
+      "Bash(echo \"GENERATED_SECRET=$\\(openssl rand -base64 32\\)\")",
+      "Bash(git add *)",
+      "Bash(git commit -q -m ' *)",
+      "Bash(GIT_SSH_COMMAND=\"ssh -o StrictHostKeyChecking=accept-new -o BatchMode=yes\" git push)",
+      "Bash(GIT_SSH_COMMAND=\"ssh -o BatchMode=yes\" git push)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} | redirect: %{redirect_url}\\\\n\" https://techmed-ais.vercel.app/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" https://techmed-ais.vercel.app/login)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} | redirect: %{redirect_url}\\\\n\" https://techmed-ais.vercel.app/dashboard)",
+      "Bash(curl -s https://techmed-ais.vercel.app/login)",
+      "Bash(curl -sI https://techmed-ais.vercel.app/login)",
+      "Bash(git commit *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" https://techmed-ais.vercel.app/sw.js)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" https://techmed-ais.vercel.app/manifest.json)",
+      "Bash(curl -sI https://techmed-ais-git-main-peters-projects-fe97a732.vercel.app/login)",
+      "Bash(curl -s -o /dev/null -w '__TRACKED_VAR__ -> %{http_code}\\\\n' https://techmed-ais.vercel.app__TRACKED_VAR__)",
+      "Bash(grep -E '\\\\.tsx$')",
+      "Bash(grep -nE 'bg-white/5\"$|bg-white/5\"\\\\s*/>|className=\"bg-white/5\"' 'app/\\(auth\\)/register/page.tsx')"
     ]
   }
 }

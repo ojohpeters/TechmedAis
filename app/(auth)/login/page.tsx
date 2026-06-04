@@ -58,12 +58,13 @@ function LoginForm() {
   }
 
   return (
-    <Card className="border-white/10 bg-white/5 text-white backdrop-blur">
-      <CardHeader>
-        <CardTitle className="text-2xl">Welcome back</CardTitle>
+    <Card className="overflow-hidden rounded-2xl border-white/10 bg-white/[0.04] text-white shadow-2xl shadow-black/30 backdrop-blur-xl">
+      <div className="h-1 bg-techmed-gradient" />
+      <CardHeader className="pb-2">
+        <CardTitle className="text-3xl font-bold tracking-tight">Welcome back</CardTitle>
         <CardDescription className="text-slate-300">Log in to continue your prep.</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-4">
         <form onSubmit={onSubmit} className="space-y-4">
           <div className="space-y-1.5">
             <Label htmlFor="email">Email</Label>
@@ -74,7 +75,7 @@ function LoginForm() {
               placeholder="you@example.com"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="bg-white/5"
+              className="h-11 border-white/10 bg-white/5 focus-visible:ring-techmed-cyan"
             />
             {errors.email && <p className="text-xs text-red-400">{errors.email}</p>}
           </div>
@@ -88,7 +89,7 @@ function LoginForm() {
                 placeholder="••••••••"
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
-                className="bg-white/5 pr-10"
+                className="h-11 border-white/10 bg-white/5 pr-10 focus-visible:ring-techmed-cyan"
               />
               <button
                 type="button"
@@ -101,9 +102,9 @@ function LoginForm() {
             </div>
             {errors.password && <p className="text-xs text-red-400">{errors.password}</p>}
           </div>
-          <Button type="submit" variant="gradient" size="lg" className="w-full" disabled={loading}>
+          <Button type="submit" variant="gradient" size="lg" className="mt-2 w-full shadow-lg shadow-techmed-cyan/20" disabled={loading}>
             {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-            Log in
+            {loading ? "Logging in…" : "Log in"}
           </Button>
         </form>
         <p className="mt-6 text-center text-sm text-slate-300">

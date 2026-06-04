@@ -124,51 +124,65 @@ export default function RegisterPage() {
 
   return (
     <div className="text-white">
-      <h1 className="text-2xl font-bold">Create your account</h1>
-      <p className="mt-1 text-sm text-slate-300">Step {step + 1} of {STEPS.length} · {STEPS[step]}</p>
+      <h1 className="text-3xl font-bold tracking-tight">
+        Create your <span className="text-gradient-pan animate-gradient-pan">account</span>
+      </h1>
+      <p className="mt-1 text-sm text-slate-300">
+        Step {step + 1} of {STEPS.length} · <span className="font-medium text-techmed-cyan">{STEPS[step]}</span>
+      </p>
 
       {/* Stepper */}
-      <div className="mt-5 flex items-center gap-2">
+      <div className="mt-6 flex items-center gap-2">
         {STEPS.map((label, i) => (
           <div key={label} className="flex flex-1 items-center gap-2">
             <div
               className={cn(
-                "flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-colors",
-                i < step ? "bg-techmed-cyan text-techmed-navy" : i === step ? "bg-techmed-blue text-white" : "bg-white/10 text-slate-400"
+                "flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-all duration-300",
+                i < step
+                  ? "bg-techmed-cyan text-techmed-navy"
+                  : i === step
+                    ? "bg-techmed-blue text-white ring-4 ring-techmed-blue/25"
+                    : "bg-white/10 text-slate-400"
               )}
             >
               {i < step ? <Check className="h-4 w-4" /> : i + 1}
             </div>
             {i < STEPS.length - 1 && (
-              <div className={cn("h-0.5 flex-1 rounded", i < step ? "bg-techmed-cyan" : "bg-white/10")} />
+              <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/10">
+                <div
+                  className="h-full rounded-full bg-techmed-cyan transition-all duration-500"
+                  style={{ width: i < step ? "100%" : "0%" }}
+                />
+              </div>
             )}
           </div>
         ))}
       </div>
 
-      <Card className="mt-6 border-white/10 bg-white/5 text-white backdrop-blur">
+      <Card className="mt-6 overflow-hidden rounded-2xl border-white/10 bg-white/[0.04] text-white shadow-2xl shadow-black/30 backdrop-blur-xl">
+        <div className="h-1 bg-techmed-gradient" />
         <CardContent className="pt-6">
           {step === 0 && (
             <div className="space-y-4 animate-fade-in">
               <Field label="Full name" error={errors.name}>
-                <Input value={personal.name} onChange={(e) => setPersonal({ ...personal, name: e.target.value })} placeholder="Adaeze Okeke" className="bg-white/5" />
+                <Input value={personal.name} onChange={(e) => setPersonal({ ...personal, name: e.target.value })} placeholder="Adaeze Okeke" className="h-11 border-white/10 bg-white/5 focus-visible:ring-techmed-cyan" />
               </Field>
               <Field label="Email address" error={errors.email}>
-                <Input type="email" value={personal.email} onChange={(e) => setPersonal({ ...personal, email: e.target.value })} placeholder="you@example.com" className="bg-white/5" />
+                <Input type="email" value={personal.email} onChange={(e) => setPersonal({ ...personal, email: e.target.value })} placeholder="you@example.com" className="h-11 border-white/10 bg-white/5 focus-visible:ring-techmed-cyan" />
               </Field>
               <Field label="Phone number" error={errors.phone}>
-                <Input value={personal.phone} onChange={(e) => setPersonal({ ...personal, phone: e.target.value })} placeholder="08012345678" className="bg-white/5" />
+                <Input value={personal.phone} onChange={(e) => setPersonal({ ...personal, phone: e.target.value })} placeholder="08012345678" className="h-11 border-white/10 bg-white/5 focus-visible:ring-techmed-cyan" />
               </Field>
               <Field label="Password" error={errors.password}>
                 <div className="relative">
-                  <Input type={showPw ? "text" : "password"} value={personal.password} onChange={(e) => setPersonal({ ...personal, password: e.target.value })} placeholder="At least 8 chars, 1 letter & 1 number" className="bg-white/5 pr-10" />
+                  <Input type={showPw ? "text" : "password"} value={personal.password} onChange={(e) => setPersonal({ ...personal, password: e.target.value })} placeholder="At least 8 chars, 1 letter & 1 number" className="h-11 border-white/10 bg-white/5 pr-10 focus-visible:ring-techmed-cyan" />
                   <button type="button" onClick={() => setShowPw((s) => !s)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
                     {showPw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
                 </div>
               </Field>
               <Field label="Confirm password" error={errors.confirmPassword}>
-                <Input type="password" value={personal.confirmPassword} onChange={(e) => setPersonal({ ...personal, confirmPassword: e.target.value })} placeholder="Re-enter your password" className="bg-white/5" />
+                <Input type="password" value={personal.confirmPassword} onChange={(e) => setPersonal({ ...personal, confirmPassword: e.target.value })} placeholder="Re-enter your password" className="h-11 border-white/10 bg-white/5 focus-visible:ring-techmed-cyan" />
               </Field>
             </div>
           )}
@@ -181,7 +195,7 @@ export default function RegisterPage() {
                   value={academic.university}
                   onChange={(v) => setAcademic({ ...academic, university: v })}
                   placeholder="Search your university"
-                  className="bg-white/5"
+                  className="h-11 border-white/10 bg-white/5"
                 />
               </Field>
               <Field label="Faculty" error={errors.faculty}>
@@ -190,7 +204,7 @@ export default function RegisterPage() {
                   value={academic.faculty}
                   onChange={(v) => setAcademic({ ...academic, faculty: v, course: "" })}
                   placeholder="Select your faculty"
-                  className="bg-white/5"
+                  className="h-11 border-white/10 bg-white/5"
                 />
               </Field>
               <Field label="Course / Department" error={errors.course}>
@@ -200,7 +214,7 @@ export default function RegisterPage() {
                   onChange={(v) => setAcademic({ ...academic, course: v })}
                   placeholder="Select your course"
                   disabled={!academic.faculty}
-                  className="bg-white/5"
+                  className="h-11 border-white/10 bg-white/5"
                 />
               </Field>
             </div>
@@ -251,11 +265,15 @@ export default function RegisterPage() {
                 <p className="mt-2 text-xs text-slate-400">Upload an avatar (optional)</p>
               </div>
               <Field label="Display name / Nickname (optional)">
-                <Input value={profile.displayName} onChange={(e) => setProfile({ ...profile, displayName: e.target.value })} placeholder={personal.name || "How should we call you?"} className="bg-white/5" />
+                <Input value={profile.displayName} onChange={(e) => setProfile({ ...profile, displayName: e.target.value })} placeholder={personal.name || "How should we call you?"} className="h-11 border-white/10 bg-white/5 focus-visible:ring-techmed-cyan" />
               </Field>
-              <div className="rounded-lg border border-white/10 bg-white/5 p-3 text-sm text-slate-300">
+              <div className="rounded-xl border border-techmed-cyan/20 bg-gradient-to-br from-techmed-blue/15 to-techmed-cyan/5 p-4 text-sm text-slate-300">
                 <p className="font-semibold text-white">Almost done! 🎉</p>
-                <p className="mt-1">You're registering with {subjectIds.length} subjects at {academic.university || "your university"}.</p>
+                <p className="mt-1">
+                  You&apos;re registering with{" "}
+                  <span className="font-semibold text-techmed-cyan">{subjectIds.length} subjects</span> at{" "}
+                  <span className="font-semibold text-white">{academic.university || "your university"}</span>.
+                </p>
               </div>
             </div>
           )}
@@ -267,13 +285,13 @@ export default function RegisterPage() {
               </Button>
             )}
             {step < STEPS.length - 1 ? (
-              <Button type="button" variant="gradient" className="ml-auto" onClick={next}>
+              <Button type="button" variant="gradient" className="ml-auto shadow-lg shadow-techmed-cyan/20" onClick={next}>
                 Continue <ChevronRight className="h-4 w-4" />
               </Button>
             ) : (
-              <Button type="button" variant="gradient" className="ml-auto" onClick={submit} disabled={loading}>
+              <Button type="button" variant="gradient" className="ml-auto shadow-lg shadow-techmed-cyan/20" onClick={submit} disabled={loading}>
                 {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-                Create account
+                {loading ? "Creating…" : "Create account"}
               </Button>
             )}
           </div>

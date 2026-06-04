@@ -96,6 +96,25 @@ const config: Config = {
           "0%, 100%": { boxShadow: "0 0 0 0 rgba(0,212,255,0.4)" },
           "50%": { boxShadow: "0 0 0 8px rgba(0,212,255,0)" },
         },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "float-slow": {
+          "0%, 100%": { transform: "translateY(0) translateX(0)" },
+          "50%": { transform: "translateY(-18px) translateX(8px)" },
+        },
+        "gradient-pan": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "spin-slow": {
+          to: { transform: "rotate(360deg)" },
+        },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -104,6 +123,11 @@ const config: Config = {
         "scale-in": "scale-in 0.25s ease-out",
         shimmer: "shimmer 1.5s infinite",
         "pulse-glow": "pulse-glow 2s infinite",
+        float: "float 6s ease-in-out infinite",
+        "float-slow": "float-slow 9s ease-in-out infinite",
+        "gradient-pan": "gradient-pan 8s ease infinite",
+        "spin-slow": "spin-slow 40s linear infinite",
+        marquee: "marquee 32s linear infinite",
       },
     },
   },

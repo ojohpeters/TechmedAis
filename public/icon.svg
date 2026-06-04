@@ -1,0 +1,14 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TECHMED icon">
+  <rect width="512" height="512" rx="96" fill="#0A1628"/>
+  <!-- Top chevron / wings -->
+  <path d="M256 78 L200 124 L256 110 L312 124 Z" fill="#FFFFFF"/>
+  <path d="M110 160 L402 160 L362 194 L296 194 L256 160 L216 194 L150 194 Z" fill="#FFFFFF"/>
+  <!-- Hexagonal shield outline -->
+  <path d="M256 202 L396 236 L396 366 L256 440 L116 366 L116 236 Z" stroke="#FFFFFF" stroke-width="16" fill="none" stroke-linejoin="round"/>
+  <!-- T -->
+  <path d="M156 240 L252 240 L252 272 L222 272 L222 366 L186 366 L186 272 L156 272 Z" fill="#FFFFFF"/>
+  <!-- M valley -->
+  <path d="M232 256 L256 302 L280 256 L280 366 L256 366 L256 366 L232 366 Z" fill="#FFFFFF"/>
+  <!-- S -->
+  <path d="M356 252 L300 252 L300 300 L336 300 L336 318 L300 318 L300 356 L356 356 L356 334 L322 334 L322 326 L356 326 Z" fill="#FFFFFF"/>
+</svg>

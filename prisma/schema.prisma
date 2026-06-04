@@ -1,0 +1,184 @@
+// TECHMED AIS Brainstorming — Prisma schema (Supabase PostgreSQL)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  STUDENT
+  ADMIN
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum AnswerOption {
+  A
+  B
+  C
+  D
+}
+
+enum ExamMode {
+  PRACTICE
+  EXAM
+  ONE_SUBJECT
+  CUSTOM
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String
+  phone         String?
+  university    String?
+  faculty       String?
+  course        String?
+  avatar        String?
+  displayName   String?
+  role          Role      @default(STUDENT)
+  totalPoints   Int       @default(0)
+  lastActiveDate DateTime?
+  suspended     Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  selectedSubjects Subject[]        @relation("UserSubjects")
+  examSessions     ExamSession[]
+  streak           Streak?
+  dailyActivities  DailyActivity[]
+  badges           UserBadge[]
+  pushSubscriptions PushSubscription[]
+
+  @@index([totalPoints])
+  @@index([university])
+}
+
+model Subject {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  code        String     @unique
+  icon        String?
+  color       String?
+  createdAt   DateTime   @default(now())
+
+  questions   Question[]
+  users       User[]     @relation("UserSubjects")
+}
+
+model Question {
+  id            String       @id @default(cuid())
+  subjectId     String
+  subject       Subject      @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  university    String
+  year          Int
+  questionText  String
+  optionA       String
+  optionB       String
+  optionC       String
+  optionD       String
+  correctAnswer AnswerOption
+  explanation   String?
+  difficulty    Difficulty   @default(MEDIUM)
+  createdAt     DateTime     @default(now())
+
+  @@index([subjectId])
+  @@index([university])
+  @@index([year])
+  @@index([difficulty])
+  @@index([subjectId, difficulty])
+}
+
+model ExamSession {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subjectIds     String[]
+  mode           ExamMode @default(EXAM)
+  totalQuestions Int
+  correctCount   Int      @default(0)
+  wrongCount     Int      @default(0)
+  unansweredCount Int     @default(0)
+  score          Int      @default(0) // points earned this session
+  percentage     Float    @default(0)
+  timeTaken      Int      @default(0) // seconds
+  // answers: { [questionId]: { selected: "A"|null, correct: "A", subjectId, difficulty } }
+  answers        Json
+  // per-subject breakdown snapshot: [{ subjectId, name, total, correct, percentage }]
+  breakdown      Json?
+  completedAt    DateTime @default(now())
+
+  @@index([userId])
+  @@index([completedAt])
+  @@index([userId, completedAt])
+}
+
+model Streak {
+  id            String    @id @default(cuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  currentStreak Int       @default(0)
+  longestStreak Int       @default(0)
+  freezeTokens  Int       @default(0)
+  lastActiveDate DateTime?
+  updatedAt     DateTime  @updatedAt
+}
+
+// One row per user per day they were active — powers the contribution heatmap.
+model DailyActivity {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date         DateTime @db.Date
+  examsCount   Int      @default(0)
+  questionsAnswered Int @default(0)
+  pointsEarned Int      @default(0)
+
+  @@unique([userId, date])
+  @@index([userId])
+}
+
+model UserBadge {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  key       String   // e.g. "streak_7", "perfect_score", "rank_warrior"
+  label     String
+  emoji     String
+  earnedAt  DateTime @default(now())
+
+  @@unique([userId, key])
+  @@index([userId])
+}
+
+model PushSubscription {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Announcement {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@index([active])
+}

@@ -1,0 +1,19 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TECHMED">
+  <defs>
+    <linearGradient id="tmGrad" x1="120" y1="120" x2="392" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00D4FF"/>
+      <stop offset="1" stop-color="#0066CC"/>
+    </linearGradient>
+  </defs>
+  <!-- Top chevron / wings -->
+  <path d="M256 60 L196 110 L256 96 L316 110 Z" fill="url(#tmGrad)"/>
+  <path d="M96 150 L416 150 L372 186 L300 186 L256 150 L212 186 L140 186 Z" fill="url(#tmGrad)"/>
+  <!-- Hexagonal shield outline -->
+  <path d="M256 196 L406 232 L406 372 L256 452 L106 372 L106 232 Z" stroke="url(#tmGrad)" stroke-width="18" fill="none" stroke-linejoin="round"/>
+  <!-- T -->
+  <path d="M150 236 L256 236 L256 270 L222 270 L222 372 L184 372 L184 270 L150 270 Z" fill="url(#tmGrad)"/>
+  <!-- M (center, formed by valley) -->
+  <path d="M232 252 L256 300 L280 252 L280 372 L256 372 L256 320 L256 372 L232 372 Z" fill="url(#tmGrad)"/>
+  <!-- S -->
+  <path d="M362 248 L300 248 L300 300 L340 300 L340 320 L300 320 L300 360 L362 360 L362 336 L324 336 L324 326 L362 326 Z" fill="url(#tmGrad)"/>
+</svg>

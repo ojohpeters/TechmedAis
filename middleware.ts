@@ -1,5 +1,8 @@
 import NextAuth from "next-auth";
-import { authConfig } from "@/lib/auth.config";
+// Use a relative import (not the "@/" alias): middleware is compiled in a
+// separate Edge pass where the path alias may not resolve, which makes Vercel
+// treat the config as an unbundled external module and fail the build.
+import { authConfig } from "./lib/auth.config";
 
 // Edge middleware uses the Prisma-free config.
 export const { auth: middleware } = NextAuth(authConfig);
